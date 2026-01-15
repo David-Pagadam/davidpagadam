@@ -103,9 +103,22 @@ footer { background:#0a0a0a; padding:3rem; text-align:center; border-top: 1px so
 .media-column {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 20px;
+    justify-content: flex-start; /* Aligns cards to the top instead of stretching them */
+    align-items: flex-start;    /* Prevents horizontal stretching */
 }
 
+/* Ensure cards have a defined maximum height */
+.media-column .cert-card {
+    width: 100%;
+    max-width: 450px; /* Adjust this to your preferred 'medium' width */
+    height: fit-content;
+}
+
+/* Force a consistent height for the media area of the cards */
+.media-column .cert-image-wrapper {
+    height: 180px; /* Set your preferred 'medium' height here */
+}
 /* For the Journey tab where we have 3 items */
 .mini-media-grid {
     display: grid;
@@ -684,5 +697,49 @@ img:not([src]) {
     font-size: 0.7rem;
     margin-left: 5px;
 }
+/* LIGHTBOX OVERLAY */
+.lightbox { 
+    display:none; 
+    position:fixed; 
+    inset:0; 
+    background:rgba(0,0,0,0.95); 
+    z-index:99999; /* Higher than everything else */
+    justify-content:center; 
+    align-items:center; 
+}
 
+.close-btn {
+    position: fixed; /* Keep it fixed relative to the screen */
+    top: 20px;
+    right: 30px;
+    color: #e6c59c; /* Gold color to match your theme */
+    font-size: 50px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 999999; /* Higher than the lightbox (10000) */
+    line-height: 1;
+    transition: 0.3s;
+    user-select: none;
+    display: block !important; /* Ensure it's not hidden */
+}
 
+.close-btn:hover {
+    color: #ffffff;
+    transform: scale(1.1);
+}
+
+/* THE CONTENT BOX */
+.lightbox-content { 
+    width: 90%; 
+    max-width: 900px; 
+    position: relative; 
+    z-index: 99999;
+}
+
+.lightbox-content iframe, 
+.lightbox-content video { 
+    width: 100%; 
+    aspect-ratio: 16 / 9; 
+    border-radius: 8px; 
+    border: 2px solid rgba(230, 197, 156, 0.3);
+}
