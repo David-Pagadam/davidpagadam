@@ -344,12 +344,29 @@
                         <p>My path into the Master of Divinity program began with a deep-seated desire to serve the church. I have seen God move through faithful teaching and community engagement.</p>
                         <p>This journey reflects my dedication to spiritual growth and the practical application of the Gospel in every sphere of life.</p>
                     </div>
-                    <div class="media-column half-width">
-                        <div class="cert-card" onclick="openLightbox('video', 'videos/V1.mp4')">
-                            <div class="cert-badge"><i class="fas fa-play"></i></div>
-                            <div class="cert-image-wrapper"><img src="image/g20.JPG" alt="Journey Video"></div>
-                            <div class="cert-details"><h4>Ministry Video</h4><p>Watch Journey</p></div>
-                        </div>
+                    <div class="cert-card" onclick="openLightbox('video', 'https://youtu.be/uOLKvuFvI84')">
+    <div class="cert-badge"><i class="fas fa-play"></i></div>
+    <div class="cert-image-wrapper">
+        <img src="image/g20.JPG" alt="Journey Video">
+    </div>
+    <div class="cert-details">
+        <h4>Ministry Video</h4>
+        <p>Watch Journey</p>
+    </div>
+</div>
+</div>
+
+<div class="cert-card" onclick="openLightbox('video', 'https://youtu.be/uOLKvuFvI84')">
+    <div class="cert-badge"><i class="fas fa-play"></i></div>
+    <div class="cert-image-wrapper">
+        <img src="image/g20.JPG" alt="Journey Video">
+    </div>
+    <div class="cert-details">
+        <h4>Ministry Video</h4>
+        <p>Watch Journey</p>
+    </div>
+</div>
+</div>
                         <div class="mini-media-grid">
                             <div class="cert-card" onclick="openLightbox('image', 'image/g20.JPG')">
                                 <div class="cert-badge"><i class="fas fa-image"></i></div>
@@ -617,12 +634,13 @@ These programs are not just about earning certificates; they are about stewardsh
         <p class="copyright">&copy; 2026 David Pagadam. All Rights Reserved.</p>
     </footer>
 
-    <div id="lightbox" class="lightbox" onclick="closeLightbox()">
-        <span class="close-btn">&times;</span>
-        <div class="lightbox-content" onclick="event.stopPropagation()">
-            <div id="lightbox-body"></div>
-        </div>
+   <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+    <span class="close-btn" onclick="closeLightbox(); event.stopPropagation();">&times;</span>
+    
+    <div class="lightbox-content" onclick="event.stopPropagation()">
+        <div id="lightbox-body"></div>
     </div>
+</div>
 
     <button id="backToTop" title="Go to top"><i class="fas fa-arrow-up"></i></button>
 
