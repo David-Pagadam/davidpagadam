@@ -21,7 +21,7 @@ window.addEventListener('load', () => {
         preloader.style.display = 'none';
     }, 500);
 });
-// LIGHTBOX LOGIC
+// UPDATED LIGHTBOX LOGIC
 function openLightbox(type, src) {
     const lightbox = document.getElementById("lightbox");
     const container = document.getElementById("lightbox-body");
@@ -29,21 +29,42 @@ function openLightbox(type, src) {
 
     if (type === 'image') {
         container.innerHTML = `<img src="${src}">`;
-    } else if (type === 'video') {
-        container.innerHTML = `<video controls autoplay><source src="${src}" type="video/mp4"></video>`;
-    } else if (type === 'pdf') {
+    } 
+    else if (type === 'video') {
+        // Check if the link is from YouTube
+        if (src.includes('youtu.be') || src.includes('youtube.com')) {
+            // Convert regular link to an Embed link
+            let videoId = "";
+            if(src.includes('youtu.be/')) {
+                videoId = src.split('youtu.be/')[1];
+            } else {
+                videoId = src.split('v=')[1].split('&')[0];
+            }
+            
+            container.innerHTML = `<iframe 
+                src="https://www.youtube.com/embed/${videoId}?autoplay=1" 
+                frameborder="0" 
+                allow="autoplay; encrypted-media; picture-in-picture" 
+                allowfullscreen 
+                style="width:100%; height:450px;"></iframe>`;
+        } else {
+            // Fallback for local videos
+            container.innerHTML = `<video controls autoplay><source src="${src}" type="video/mp4"></video>`;
+        }
+    } 
+    else if (type === 'pdf') {
         container.innerHTML = `<iframe src="${src}"></iframe>`;
     }
 
     lightbox.style.display = "flex";
     document.body.style.overflow = "hidden";
 }
-
-function closeLightbox() {
-    document.getElementById("lightbox").style.display = "none";
-    document.body.style.overflow = "auto";
-}
-
+// Add this to your script.js
+document.addEventListener('keydown', function(event) {
+    if (event.key === "Escape") {
+        closeLightbox();
+    }
+});
 // INTERSECTION OBSERVER (Fade in)
 const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
@@ -126,4 +147,18 @@ function openBlogModal(key) {
 function closeBlogModal() {
     document.getElementById('blogModal').style.display = "none";
     document.body.style.overflow = "auto";
+}
+// ADD THIS FUNCTION TO YOUR SCRIPT.JS
+function closeLightbox() {
+    const lightbox = document.getElementById("lightbox");
+    const container = document.getElementById("lightbox-body");
+
+    if (lightbox) {
+        lightbox.style.display = "none"; // Hide the window
+        document.body.style.overflow = "auto"; // Let the page scroll again
+    }
+
+    if (container) {
+        container.innerHTML = ""; // This stops the YouTube video/music
+    }
 }
