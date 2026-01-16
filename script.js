@@ -162,3 +162,20 @@ function closeLightbox() {
         container.innerHTML = ""; // This stops the YouTube video/music
     }
 }
+
+function switchSubTab(subId, btn) {
+    // 1. Hide all sub-panes
+    const panes = document.querySelectorAll('.sub-tab-pane');
+    panes.forEach(p => p.style.display = 'none');
+    
+    // 2. Show the specific sub-pane
+    document.getElementById(subId).style.display = 'block';
+    
+    // 3. Remove 'active' class from all buttons in this specific sub-group
+    const parentContainer = btn.parentElement;
+    const buttons = parentContainer.querySelectorAll('.sub-tab-btn');
+    buttons.forEach(b => b.classList.remove('active'));
+    
+    // 4. Add 'active' class to the button that was clicked
+    btn.classList.add('active');
+}
