@@ -776,9 +776,9 @@ img:not([src]) {
     transform: scale(1.05); /* Slightly larger to stand out */
 }
 
-/* --- DESKTOP VIEW --- */
+/* --- DESKTOP VIEW (Computer) --- */
 .main-nav {
-    background: #000; /* Black background */
+    background: #000;
     padding: 15px 0;
     position: sticky;
     top: 0;
@@ -794,12 +794,15 @@ img:not([src]) {
     padding: 0 20px;
 }
 
-/* KEEPING THE LOGO GOLDEN */
 .logo {
     font-size: 22px;
     font-weight: bold;
-    color: #d4af37; /* This is the golden color from your image */
-    font-family: serif; /* Matches the style in your screenshot */
+    color: #d4af37; /* Golden Color */
+}
+
+/* HIDE the tiny box and hamburger on desktop */
+.nav-toggle, .hamburger {
+    display: none !important;
 }
 
 .nav-links {
@@ -808,35 +811,42 @@ img:not([src]) {
 }
 
 .nav-links a {
-    color: #fff; /* White links */
+    color: #fff;
     text-decoration: none;
     font-size: 14px;
 }
 
-/* HIDE mobile elements on Desktop */
-.nav-toggle, .hamburger {
-    display: none;
-}
-
-/* --- MOBILE VIEW (Screens under 992px) --- */
-@media (max-width: 992px) {
+/* --- MOBILE VIEW (Phone) --- */
+@media screen and (max-width: 992px) {
+    /* 1. Show the hamburger icon */
     .hamburger {
-        display: block; /* Hamburger only shows on mobile */
+        display: block !important;
         cursor: pointer;
         font-size: 24px;
         color: #fff;
     }
 
+    /* 2. COMPLETELY HIDE THE TINY BOX */
+    .nav-toggle {
+        display: none !important;
+    }
+
+    /* 3. Hide the menu by default on mobile */
     .nav-links {
-        display: none; /* Hidden on mobile until clicked */
+        display: flex; /* Flex is needed for the column layout */
         flex-direction: column;
         position: absolute;
-        top: 100%;
+        top: 60px; /* Adjust based on your header height */
         left: 0;
         width: 100%;
         background: #000;
-        padding: 20px 0;
         text-align: center;
+        
+        /* Hidden state for animation */
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+        transition: max-height 0.4s ease, opacity 0.3s ease;
     }
 
     .nav-links a {
@@ -845,8 +855,9 @@ img:not([src]) {
         border-bottom: 1px solid #222;
     }
 
-    /* Shows the menu when you click the hamburger */
-    .nav-toggle:checked ~ .nav-links {
-        display: flex;
+    /* 4. THE FIX: Trigger menu show when checkbox is "clicked" through label */
+    #nav-toggle:checked ~ .nav-links {
+        max-height: 600px; /* Expands to show links */
+        opacity: 1;
     }
 }
