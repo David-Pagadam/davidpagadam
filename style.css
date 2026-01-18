@@ -831,7 +831,6 @@ img:not([src]) {
     display: none;
 }
 
-/* --- 3. MOBILE MENU FIX (Under 992px) --- */
 @media screen and (max-width: 992px) {
     .hamburger {
         display: block !important;
@@ -841,37 +840,37 @@ img:not([src]) {
     }
 
     .nav-links {
-        display: none; /* Hidden until clicked */
+        display: none; 
         flex-direction: column;
         position: absolute;
-        top: 100%; /* Drops down from header */
+        top: 100%; 
         left: 0;
         width: 100%;
-        background: rgba(0, 0, 0, 0.98); /* Solid black */
+        background: rgba(0, 0, 0, 0.98); 
         text-align: center;
         
-        /* THE "SIZE" FIX: Prevents occupying 90% of screen */
-        padding: 10px 0;
-        max-height: 60vh; /* Limits menu to 60% of screen height */
-        overflow-y: auto; /* Adds scroll if list is too long */
-        box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+        /* THE CRITICAL SIZE FIXES */
+        padding: 5px 0;           /* Almost no padding at top/bottom of the menu */
+        max-height: 50vh;        /* Limits the menu to HALF the screen height */
+        overflow-y: auto;        /* Allows scrolling inside the menu if needed */
+        border-bottom: 2px solid #d4af37; /* Adds a golden line at the bottom */
     }
 
     .nav-links a {
-        padding: 12px 0; /* Reduced padding for compact look */
-        width: 85%;
+        padding: 8px 0;          /* Very tight vertical spacing */
+        font-size: 14px;         /* Smaller text to save space */
+        width: 90%;              /* Wider links for easier tapping */
         margin: 0 auto;
-        border-bottom: 1px solid #222;
-        font-size: 16px;
+        border-bottom: 1px solid #222; /* Thin separator */
+        display: block;
     }
 
-    /* SHOW MENU ON CLICK */
+    /* Remove border from the last item so it looks cleaner */
+    .nav-links a:last-child {
+        border-bottom: none;
+    }
+
     #nav-toggle:checked ~ .nav-links {
         display: flex;
-    }
-    
-    /* OPTIONAL: Change Hamburger to a simple 'X' when open */
-    #nav-toggle:checked ~ .hamburger i::before {
-        content: "\f00d"; /* FontAwesome 'X' code */
     }
 }
