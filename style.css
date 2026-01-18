@@ -776,17 +776,26 @@ img:not([src]) {
     transform: scale(1.05); /* Slightly larger to stand out */
 }
 
-/* --- DESKTOP VIEW (Computer) --- */
+/* --- 1. THE "TINY CROSS" FIX --- */
+/* This hides the checkbox far off-screen so no 'X' or 'Box' appears */
+.nav-toggle {
+    position: absolute;
+    left: -9999px;
+    visibility: hidden;
+}
+
+/* --- 2. DESKTOP HEADER --- */
 .main-nav {
     background: #000;
     padding: 15px 0;
     position: sticky;
     top: 0;
     z-index: 1000;
+    width: 100%;
 }
 
 .nav-container {
-    max-width: 1100px;
+    max-width: 1200px;
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
@@ -795,14 +804,10 @@ img:not([src]) {
 }
 
 .logo {
+    color: #d4af37 !important; /* Your Golden Color */
     font-size: 22px;
     font-weight: bold;
-    color: #d4af37; /* Golden Color */
-}
-
-/* HIDE the tiny box and hamburger on desktop */
-.nav-toggle, .hamburger {
-    display: none !important;
+    font-family: serif;
 }
 
 .nav-links {
@@ -814,50 +819,59 @@ img:not([src]) {
     color: #fff;
     text-decoration: none;
     font-size: 14px;
+    transition: color 0.3s;
 }
 
-/* --- MOBILE VIEW (Phone) --- */
+.nav-links a:hover {
+    color: #d4af37;
+}
+
+/* Hide hamburger on desktop */
+.hamburger {
+    display: none;
+}
+
+/* --- 3. MOBILE MENU FIX (Under 992px) --- */
 @media screen and (max-width: 992px) {
-    /* 1. Show the hamburger icon */
     .hamburger {
         display: block !important;
-        cursor: pointer;
+        color: white;
         font-size: 24px;
-        color: #fff;
+        cursor: pointer;
     }
 
-    /* 2. COMPLETELY HIDE THE TINY BOX */
-    .nav-toggle {
-        display: none !important;
-    }
-
-    /* 3. Hide the menu by default on mobile */
     .nav-links {
-        display: flex; /* Flex is needed for the column layout */
+        display: none; /* Hidden until clicked */
         flex-direction: column;
         position: absolute;
-        top: 60px; /* Adjust based on your header height */
+        top: 100%; /* Drops down from header */
         left: 0;
         width: 100%;
-        background: #000;
+        background: rgba(0, 0, 0, 0.98); /* Solid black */
         text-align: center;
         
-        /* Hidden state for animation */
-        max-height: 0;
-        overflow: hidden;
-        opacity: 0;
-        transition: max-height 0.4s ease, opacity 0.3s ease;
+        /* THE "SIZE" FIX: Prevents occupying 90% of screen */
+        padding: 10px 0;
+        max-height: 60vh; /* Limits menu to 60% of screen height */
+        overflow-y: auto; /* Adds scroll if list is too long */
+        box-shadow: 0 10px 20px rgba(0,0,0,0.5);
     }
 
     .nav-links a {
-        padding: 15px 0;
-        display: block;
+        padding: 12px 0; /* Reduced padding for compact look */
+        width: 85%;
+        margin: 0 auto;
         border-bottom: 1px solid #222;
+        font-size: 16px;
     }
 
-    /* 4. THE FIX: Trigger menu show when checkbox is "clicked" through label */
+    /* SHOW MENU ON CLICK */
     #nav-toggle:checked ~ .nav-links {
-        max-height: 600px; /* Expands to show links */
-        opacity: 1;
+        display: flex;
+    }
+    
+    /* OPTIONAL: Change Hamburger to a simple 'X' when open */
+    #nav-toggle:checked ~ .hamburger i::before {
+        content: "\f00d"; /* FontAwesome 'X' code */
     }
 }
